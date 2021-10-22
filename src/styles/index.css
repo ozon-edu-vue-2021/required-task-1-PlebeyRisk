@@ -28,11 +28,7 @@ button {
     transition: 0.2s background-color;
 }
 
-button:disabled {
-    background-color: #CFD8DC;
-}
-
-button:disabled:hover {
+button:disabled, button:disabled:hover {
     background-color: #CFD8DC;
 }
 
@@ -130,7 +126,6 @@ main {
     max-width: 100%;
     min-height: 350px;
     margin: 0;
-    object-fit: contain;
 }
 
 .popup figure img {

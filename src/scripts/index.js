@@ -2,7 +2,8 @@
 
 const action = document.querySelector('.action');
 const container = document.querySelector('.images');
-
+const templateImageCard = document.querySelector('#image');
+const templateImagePopup = document.querySelector('#popup-image');
 const popup = document.querySelector('.popup');
 const popupContainer = document.querySelector('.popup .content');
 const popupClose = document.querySelector('.popup .action');
@@ -58,9 +59,9 @@ const showLoader = function () {
  * Удаляет таймаут индикатора, ничего не возвращает.
  */
 const hideLoader = function () {
+    clearTimeout(loaderTimeout);
     loaderTimeout = setTimeout(function () {
         loader.style.visibility = 'hidden';
-        clearTimeout(loaderTimeout);
     }, 700);
 }
 
@@ -88,7 +89,7 @@ const renderPictures = function (list) {
     if (!list.length) {
         throw Error(`Pictures not defined. The list length: ${list.length}`);
     }
-    const templateImageCard = document.querySelector('#image');
+
     const fragment = document.createDocumentFragment();
 
     list.forEach(function (element) {
@@ -115,7 +116,6 @@ const renderPictures = function (list) {
  * @param {object} picture
  */
 const renderPopupPicture = function (picture) {
-    const templateImagePopup = document.querySelector('#popup-image');
     const clone = templateImagePopup.content.cloneNode(true);
     const img = clone.querySelector('img');
     const link = clone.querySelector('a');
@@ -150,7 +150,7 @@ const togglePopup = function () {
  */
 const actionHandler = function (evt) {
     evt.preventDefault();
-    const nextPage = evt.currentTarget.dataset.page;
+    const nextPage = +evt.currentTarget.dataset.page;
     evt.currentTarget.dataset.page = nextPage + 1;
 
     if (nextPage > MAX_PAGE_IMAGES) {
