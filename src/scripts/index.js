@@ -1,8 +1,6 @@
 'use strict';
 
 const action = document.querySelector('.action');
-const templateImageCard = document.querySelector('#image');
-const templateImagePopup = document.querySelector('#popup-image');
 const container = document.querySelector('.images');
 
 const popup = document.querySelector('.popup');
@@ -10,7 +8,7 @@ const popupContainer = document.querySelector('.popup .content');
 const popupClose = document.querySelector('.popup .action');
 const loader = document.querySelector('.loader');
 
-const MAX_PAGE_IAMGES = 34;
+const MAX_PAGE_IMAGES = 34;
 let loaderTimeout;
 
 /**
@@ -62,7 +60,7 @@ const showLoader = function () {
 const hideLoader = function () {
     loaderTimeout = setTimeout(function () {
         loader.style.visibility = 'hidden';
-        loaderTimeout.clearTimeout();
+        clearTimeout(loaderTimeout);
     }, 700);
 }
 
@@ -90,11 +88,11 @@ const renderPictures = function (list) {
     if (!list.length) {
         throw Error(`Pictures not defined. The list length: ${list.length}`);
     }
-
-    const clone = templateImageCard.content.cloneNode(true);
+    const templateImageCard = document.querySelector('#image');
     const fragment = document.createDocumentFragment();
 
     list.forEach(function (element) {
+        const clone = templateImageCard.content.cloneNode(true);
         const link = clone.querySelector('a');
 
         link.href = element.url;
@@ -117,6 +115,7 @@ const renderPictures = function (list) {
  * @param {object} picture
  */
 const renderPopupPicture = function (picture) {
+    const templateImagePopup = document.querySelector('#popup-image');
     const clone = templateImagePopup.content.cloneNode(true);
     const img = clone.querySelector('img');
     const link = clone.querySelector('a');
@@ -154,8 +153,8 @@ const actionHandler = function (evt) {
     const nextPage = evt.currentTarget.dataset.page;
     evt.currentTarget.dataset.page = nextPage + 1;
 
-    if (nextPage > MAX_PAGE_IAMGES) {
-        console.warn(`WARN: You are trying to call a page that exceeds ${MAX_PAGE_IAMGES}`);
+    if (nextPage > MAX_PAGE_IMAGES) {
+        console.warn(`WARN: You are trying to call a page that exceeds ${MAX_PAGE_IMAGES}`);
         evt.currentTarget.disabled = true;
     } else {
         getPictures(nextPage);
@@ -171,8 +170,10 @@ const actionHandler = function (evt) {
 const imageHandler = function (evt) {
     evt.preventDefault();
 
-    if (evt.target.closest('a')) {
-        getPictureInfo(evt.target.dataset.id);
+    const linkElem = evt.target.closest('a');
+
+    if (linkElem) {
+        getPictureInfo(linkElem.dataset.id);
     }
 }
 
