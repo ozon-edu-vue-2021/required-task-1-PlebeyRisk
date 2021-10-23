@@ -153,11 +153,13 @@ const actionHandler = function (evt) {
     const nextPage = +evt.currentTarget.dataset.page;
     evt.currentTarget.dataset.page = nextPage + 1;
 
+    if (nextPage <= MAX_PAGE_IMAGES) {
+        getPictures(nextPage);
+    }
+
     if (nextPage === MAX_PAGE_IMAGES) {
         evt.currentTarget.disabled = true;
         console.warn(`WARN: This is last page. Max page: ${MAX_PAGE_IMAGES}`);
-    } else {
-        getPictures(nextPage);
     }
 }
 
