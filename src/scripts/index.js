@@ -153,9 +153,9 @@ const actionHandler = function (evt) {
     const nextPage = +evt.currentTarget.dataset.page;
     evt.currentTarget.dataset.page = nextPage + 1;
 
-    if (nextPage > MAX_PAGE_IMAGES) {
-        console.warn(`WARN: You are trying to call a page that exceeds ${MAX_PAGE_IMAGES}`);
+    if (nextPage === MAX_PAGE_IMAGES) {
         evt.currentTarget.disabled = true;
+        console.warn(`WARN: This is last page. Max page: ${MAX_PAGE_IMAGES}`);
     } else {
         getPictures(nextPage);
     }
