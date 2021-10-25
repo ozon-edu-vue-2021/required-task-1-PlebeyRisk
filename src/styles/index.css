@@ -9,7 +9,7 @@ body {
 img {
     width: 100%;
     max-width: 100%;
-    display: bloсk;
+    display: block;
 }
 
 a {
@@ -28,11 +28,7 @@ button {
     transition: 0.2s background-color;
 }
 
-button:disabled {
-    background-color: #CFD8DC;
-}
-
-button:disabled:hover {
+button:disabled, button:disabled:hover {
     background-color: #CFD8DC;
 }
 
@@ -55,15 +51,18 @@ main {
     font-size: 16px;
     padding: 10px 20px;
     border-radius: 6px;
-    margin: 10px 0;
 }
 
 .action:hover {
     background-color: #4CAF50;
 }
 
+.action.fetch {
+    margin: 10px auto;
+}
+
 /* Images style */
-.content {
+.images.content {
     position: relative;
     padding: 20px;
     margin-bottom: 20px;
@@ -72,7 +71,7 @@ main {
     min-height: 400px;
 }
 
-a {
+.images a {
     display: inline-block;
     border-radius: 6px;
     overflow: hidden;
@@ -80,43 +79,19 @@ a {
     min-height: 100px;
 }
 
-a:nth-child(n) {
+.images a:nth-child(n) {
     background-color: #EFEBE9;
 }
 
-a:nth-child(2n) {
+.images a:nth-child(2n) {
     background-color: #D7CCC8;
 }
 
-a:nth-child(3n) {
+.images a:nth-child(3n) {
     background-color: #BCAAA4;
 }
 
 /* Popup style */
-.popup .content {
-    text-align: right;
-    column-count: initial;
-}
-
-figure {
-    max-width: 100%;
-    min-height: 350px;
-    margin: 0;
-}
-
-figure img {
-    border-radius: 6px;
-}
-
-figcaption {
-    color: #424242;
-    margin: 5px 0;
-}
-
-.content {
-    border-radius: 6px;
-}
-
 .popup {
     position: fixed;
     visibility: hidden;
@@ -126,33 +101,59 @@ figcaption {
     bottom: 0;
     right: 0;
     background-color: rgba(33, 33, 33, 0.5);
-    z-index: -1;
+    z-index: 1;
+    max-height: 100vw;
+    overflow-y: auto;
 }
 
 .popup.open {
     visibility: visible;
 }
 
-.action {
-    position: absolute;
-    top: 50px;
-    right: 50px;
-    background-color: transparent;
-    line-height: 0;
-    font-size: 50px;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-}
-
 .popup .content {
+    text-align: right;
+    column-count: initial;
+    border-radius: 6px;
     width: 100%;
     margin: auto;
     box-sizing: border-box;
     max-width: 600px;
     background-color: #fff;
-    border-radius: 6px;
     padding: 20px;
+}
+
+.popup figure {
+    max-width: 100%;
+    min-height: 350px;
+    margin: 0;
+}
+
+.popup figure img {
+    border-radius: 6px;
+}
+
+.popup figcaption {
+    color: #424242;
+    margin: 5px 0;
+}
+
+.popup .action {
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    background-color: transparent;
+    line-height: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    padding: 0;
+    display: inline-block;
+}
+
+.popup .action .icon {
+    font-size: 50px;
+    margin-top: -2px;
+    display: inline-block;
 }
 
 .popup .link {
